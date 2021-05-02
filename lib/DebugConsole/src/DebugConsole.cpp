@@ -1,6 +1,6 @@
 
 #include <Arduino.h>
-#include "debug_console.h"
+#include "DebugConsole.h"
 
 char output_buffer[OUTPUT_BUFFER_SIZE];
 

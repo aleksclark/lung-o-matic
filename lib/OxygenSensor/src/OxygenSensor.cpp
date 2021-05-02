@@ -5,12 +5,13 @@
 // Gasboadd 7500E O2 sensor
 //
 
+#include <Pinout.h>
 #include "gasboard7500E.h"
 #include <SoftwareSerial.h>
 
-#include "pinout.h"
-#include "oxygen_sensor.h"
-#include "debug_console.h"
+#include "OxygenSensor.h"
+#include <DebugConsole.h>
+
 
 
 SoftwareSerial softSer = SoftwareSerial(O2SENS_RX_PIN, O2SENS_TX_PIN);
@@ -42,22 +43,15 @@ void setup_o2sensor()
   
   if (sensor_log_enabled)
   {
-    DBG_print("Hello ");
 
     delay(3000); // power on delay
     #ifdef O2SENSE_NEED_METADATA
   
-    // I don't think these commands are working
-    for (int i = 0; i < cmd_vernum[1] + 3; i++)
-          {
-            DBG_print_buffered("%02X ", cmd_vernum[i]);
-          }
     softSer.write((uint8_t*)cmd_vernum, 4);
     delay(500);
     softSer.write((uint8_t*)cmd_sernum, 4);
     delay(500);
     #endif
-    DBG_println("World");
   }
 
   DBG_println("Gasboard 7500E sensor initialized!");
